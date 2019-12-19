@@ -11,20 +11,16 @@ namespace App\Services;
 use App\Entity\Article;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ArticleViewsMailer implements EventSubscriber
 {
     private $mailer;
 
-    private $translator;
-
     private const NB_VIEWS_TO_SEND_AN_EMAIL = [10, 50, 100, 200, 400, 1000];
 
-    public function __construct(\Swift_Mailer $mailer, TranslatorInterface $translator)
+    public function __construct(Mailer $mailer)
     {
         $this->mailer = $mailer;
-        $this->translator = $translator;
     }
 
     public function getSubscribedEvents()
@@ -40,17 +36,10 @@ class ArticleViewsMailer implements EventSubscriber
             return;
         }
 
-        if (!in_array(self::NB_VIEWS_TO_SEND_AN_EMAIL, $entity->getNbViews()) ) {
+        if (!in_array($entity->getNbViews(), self::NB_VIEWS_TO_SEND_AN_EMAIL) ) {
             return;
         }
 
-        $message = new \Swift_Message($this->translator->trans('mailer.article.subject'),
-            $this->translator->trans('mailer.article.nb_views', ['nb_views' => $entity->getNbViews()])
-        );
-
-        $message->addTo('steven45.sg@gmail.com')
-                ->addFrom('steven45.sg@gmail.com');
-
-        $this->mailer->send($message);
+        $this->mailer->sendNbViews($entity);
     }
 }
