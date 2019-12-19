@@ -1,0 +1,56 @@
+home: 'Home'
+title: 'Welcome on my blog !'
+welcome: 'Welcome on my website'
+h1: 'My website'
+switch_mode: 'Dark / Light'
+dropdown_user:
+  mine_articles: 'See my articles'
+  favorite_articles: 'My favorite articles'
+menu:
+  access_blog: 'Go on my blog'
+  add_article: 'Add an article'
+security:
+  login:
+    dropdown:
+      login: 'Log in'
+      logout: 'Log out'
+    title: 'Connection'
+    username: 'Username'
+    password: 'Password'
+    button: 'Log in'
+mailer:
+  article:
+    subject: 'Your article is all the rage'
+    nb_views: 'Your article has been seen %nb_views% ! Well play bro !'
+blog:
+  title: 'All articles'
+  h1: 'List of articles'
+  creation_date: 'Creation date'
+  updated_at: 'Updated at'
+  recent_articles:
+    title: 'Categories'
+    all: 'All categories'
+    button: 'See more ..'
+  paging:
+    previous: 'Previous'
+    next: 'Next'
+  list:
+    title: 'All categories'
+    see_more: 'See more'
+    nothing_to_show: "No article found ! See you ! :)"
+  favourite:
+    title: "My favourite articles"
+  view:
+    comments:
+      title: 'Comments'
+  add:
+    title: "Add an article"
+  edit:
+    title: "Edit an article"
+  flash:
+    delete:
+      success: "The deletion went well !"
+    edit:
+      success: "The modification went well !"
+    add:
+      success: "The creation went well !"

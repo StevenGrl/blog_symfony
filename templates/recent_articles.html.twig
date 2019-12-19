@@ -1,0 +1,36 @@
+<div class="m-4">
+    <div class="card w-100 mb-3 justify-content-center mx-auto">
+        <div class="card w-100">
+            <div class="card-header text-center">
+                {{ 'blog.recent_articles.title'|trans }}
+            </div>
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item">
+                    <a href="{{ path('article_index') }}" class="text-decoration-none">
+                        {{ 'blog.recent_articles.all'|trans }}
+                    </a>
+                    <span class="badge badge-primary">{{ nbArticlesTotal }}</span>
+                </li>
+                {% for category in categories %}
+                    <li class="list-group-item">
+                        <a href="{{ path('category_article_index', {'id': category[0].id}) }}"
+                           class="text-decoration-none">
+                            {{ category[0].name }}
+                        </a>
+                        <span class="badge badge-primary">{{ category['nbArticles'] }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% for article in articles %}
+        <div class="card mb-2 w-100 mx-auto">
+            <div class="card-body text-center">
+                <h5 class="card-title">{{ article.title }}</h5>
+                <a class="btn btn-outline-primary btn-sm"
+                   href="{{ path('article_show', {'id': article.id}) }}"
+                   role="button">{{ 'blog.recent_articles.button'|trans }}</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

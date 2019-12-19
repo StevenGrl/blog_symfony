@@ -1,0 +1,12 @@
+{% extends 'blog.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block h1 %}
+{% endblock %}
+
+{% block articles %}
+    {{ include('article/_form.html.twig', { 'title': title }) }}
+{% endblock %}

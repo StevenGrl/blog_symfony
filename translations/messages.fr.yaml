@@ -1,0 +1,56 @@
+home: 'Accueil'
+title: 'Bienvenue sur mon blog !'
+welcome: 'Bienvenue sur mon site !'
+h1: 'Mon site'
+switch_mode: 'Sombre / Lumineux'
+dropdown_user:
+  mine_articles: 'Voir mes articles'
+  favorite_articles: 'Mes articles préférés'
+menu:
+  access_blog: 'Accéder à mon blog'
+  add_article: 'Ajouter un article'
+security:
+  login:
+    dropdown:
+      login: 'Se connecter'
+      logout: 'Se déconnecter'
+    title: 'Connexion'
+    username: "Nom d'utilisateur"
+    password: 'Mot de passe'
+    button: 'Se connecter'
+mailer:
+  article:
+    subject: 'Votre article fait fureur !'
+    nb_views: "Votre article a été vu %nb_views% ! Bravo !"
+blog:
+  title: 'Tous les articles'
+  h1: 'Liste des articles'
+  creation_date: 'Date de création'
+  updated_at: 'Dernière mise à jour'
+  recent_articles:
+    title: 'Catégories'
+    all: 'Toutes les catégories'
+    button: 'Voir plus ..'
+  paging:
+    previous: 'Précédent'
+    next: 'Suivant'
+  list:
+    title: 'Toutes catégories'
+    see_more: 'Voir plus'
+    nothing_to_show: "Aucun article n'existe ! Revenez plus tard ! :)"
+  favourite:
+    title: "Mes articles favoris"
+  view:
+    comments:
+      title: 'Commentaires'
+  add:
+    title: "Ajout d'un article"
+  edit:
+    title: "Edition d'un article"
+  flash:
+    delete:
+      success: "La suppression s'est bien passée !"
+    edit:
+      success: "La modification s'est bien passée !"
+    add:
+      success: "L'ajout s'est bien passé !"

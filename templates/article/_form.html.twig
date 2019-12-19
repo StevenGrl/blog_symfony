@@ -1,0 +1,45 @@
+<div class="col-9 mx-auto mt-4">
+    <div class="card">
+        <div class="card-header text-center">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="card-body">
+            <div class="font-weight-bold">
+                {{ form_start(form) }}
+                {{ form_row(form.title) }}
+                {{ form_row(form.author) }}
+                {{ form_row(form.content) }}
+                <div class="row">
+                    <div class="col-4 p-0">
+                        <div class="form-group-select">
+                            {{ form_label(form.categories) }}
+                            {{ form_widget(form.categories) }}
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-4 mt-2">
+                                {{ form_label(form.nbViews) }}
+                                {{ form_widget(form.nbViews) }}
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group text-center mt-5">
+                                    <div class="custom-control custom-checkbox">
+                                        <div class="custom-control custom-switch">
+                                            {{ form_label(form.published) }}
+                                            {{ form_widget(form.published) }}
+                                            {{ form_errors(form.published) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

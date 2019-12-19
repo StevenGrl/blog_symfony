@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ 'title'|trans }}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    {% if app.session.get('theme') == 'light' %}
+        <link rel="stylesheet" id="light" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    {% else %}
+        <link rel="stylesheet" id="dark" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    {% endif %}
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <script src="https://kit.fontawesome.com/271fb02698.js" crossorigin="anonymous"></script>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<input type="hidden" id="theme" name="theme" value="{{ app.session.get('theme') }}">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary text-center">
+    <a class="navbar-brand" href="{{ path('home') }}">{{ 'home'|trans }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('article_index') }}">{{ 'menu.access_blog'|trans }}</a>
+            </li>
+            {% block menu %}
+            {% endblock %}
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown active">
+                {% if app.request.locale == 'fr' %}
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    FR
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <div class="mx-auto dropdown-item">
+                        {% if app.request.attributes.get('id') %}
+                            <a class="dropdown-item"
+                               href="{{ path(app.request.attributes.get('_route'), {
+                                   '_locale': 'en',
+                                   'id': app.request.attributes.get('id')
+                               }) }}">
+                                EN
+                            </a>
+                        {% else %}
+                            <a class="dropdown-item"
+                               href="{{ path(app.request.attributes.get('_route'), {'_locale': 'en'}) }}">
+                                EN
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% else %}
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        EN
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="mx-auto dropdown-item">
+                            {% if app.request.attributes.get('id') %}
+                                <a class="dropdown-item"
+                                   href="{{ path(app.request.attributes.get('_route'), {
+                                       '_locale': 'fr',
+                                       'id': app.request.attributes.get('id')
+                                   }) }}">
+                                    FR
+                                </a>
+                            {% else %}
+                                <a class="dropdown-item"
+                                   href="{{ path(app.request.attributes.get('_route'), {'_locale': 'fr'}) }}">
+                                    FR
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </li>
+            {% if app.user %}
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ app.user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="mx-auto dropdown-item">
+                            <div class="custom-control custom-switch">
+                                {% if app.session.get('theme') == 'light' %}
+                                    <input type="checkbox" class="custom-control-input" checked="checked" id="switch_theme">
+                                {% else %}
+                                    <input type="checkbox" class="custom-control-input" id="switch_theme">
+                                {% endif %}
+                                <label class="custom-control-label" for="switch_theme">
+                                    {{ 'switch_mode'|trans }}
+                                </label>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="{{ path('article_mine') }}">
+                            {{ 'dropdown_user.mine_articles'|trans }}
+                            <span class="badge badge-primary" id="nb_articles_mine"></span>
+                        </a>
+                        <a class="dropdown-item" href="{{ path('favourite_articles') }}">
+                            {{ 'dropdown_user.favorite_articles'|trans }}
+                            <span class="badge badge-primary" id="nb_favourite_articles"></span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'security.login.dropdown.logout'|trans }}</a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_login') }}">{{ 'security.login.dropdown.login'|trans }}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 d-none d-lg-block">
+            {% block leftMenu %}
+                {% if is_granted("ROLE_USER") %}
+                    {{ render(controller('App\\Controller\\ArticleController::recentArticlesAction', {'nbArticles': 3 } )) }}
+                {% endif %}
+            {% endblock %}
+        </div>
+        <div class="col col-lg-7 mr-auto mt-3">
+            <h1 class="text-center">{% block h1 %}{{ 'h1'|trans }}{% endblock %}</h1>
+
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }} mt-3 text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            <div class="mt-3">
+                {% block content %}
+                    <h2 class="text-center">{{ 'welcome'|trans }}</h2>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="{{ asset('switch_theme.js') }}"></script>
+<script src="{{ asset('count_articles.js') }}"></script>
+{% block javascript %}{% endblock %}
+</body>
+</html>

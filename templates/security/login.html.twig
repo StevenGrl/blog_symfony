@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Login{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card w-50 mx-auto mt-5 text-center bg-light shadow-lg">
+        <div class="card-header">
+            <h2 class="card-title">{{ 'security.login.title'|trans }}</h2>
+        </div>
+        <div class="card-body">
+            <form action="{{ path('app_login_check') }}" method="post">
+                <div class="form-group">
+                    <label for="username">{{ 'security.login.username'|trans }}</label>
+                    <input type="text" class="form-control w-50 mx-auto" id="username"
+                           name="_username" value="{{ lastUsername }}"
+                           placeholder="{{ 'security.login.username'|trans }}"/>
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        steven (admin) | axel (user)
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="password">{{ 'security.login.password'|trans }}</label>
+                    <input type="password" class="form-control w-50 mx-auto" id="password"
+                           aria-describedby="passwordHelpBlock" name="_password"
+                           placeholder="{{ 'security.login.password'|trans }}"/>
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        {{ 'security.login.password'|trans }} : azerty
+                    </small>
+                </div>
+
+                <input type="hidden" name="_target_path" value="{{ targetPath }}">
+
+                <button type="submit" class="btn btn-primary">
+                    {{ 'security.login.button'|trans }} <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+body {
+    background-color: #e8e8e8;
+}
+
+.move-arrow:hover .fa-arrow-right {
+    transition: margin-left .3s;
+    margin-left: 15px;
+}
+
+.move-arrow .fa-arrow-right {
+    transition: margin-left .3s;
+    margin-left: 0;
+}
+
+.form-control:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 !important;
+}
+
+.form-group-select {
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+select {
+    padding: 10px !important;
+    margin: -3px 30px -11px 18px !important;
+}
+
+.border-left {
+    border-left-width: 3px !important;
+}
+
+.img-cover {
+    object-fit: cover;
+    object-position: 50% 50%;
+    width: 100%;
+    height: 30vh;
+}
+
+.flag {
+    width: 2.5vw;
+}
+
+.fa-heart {
+    color: #d9534f;
+}
+
+.far.fa-heart:hover, .fas.fa-heart:hover {
+    cursor: pointer;
+}
+
+.fa-sm {
+    transition: 1s;
+}
+
+.fa-lg {
+    transition: 1s;
+}

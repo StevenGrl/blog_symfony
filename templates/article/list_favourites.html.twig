@@ -1,0 +1,57 @@
+{% extends 'blog.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block h1 %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block articles %}
+    {% for article in articles %}
+        <div class="jumbotron mb-3 bg-white border p-0">
+            <div class="row p-3">
+                <div class="col-3 my-auto">
+                    <img src="{{ asset(article.thumbnail) }}"
+                         class="img-fluid rounded" alt="image en chargement ou corompue">
+                </div>
+                <div class="col-9">
+                    <h2>
+                        <a href="{{ path('article_show', { 'id': article.id }) }}"
+                        class="text-decoration-none text-primary font-weight-normal font-italic">
+                            {{ article.title|capitalize }}
+                        </a>
+                    </h2>
+                    <div class="details">
+                        <p class="font-weight-light font-italic text-muted mb-0">
+                           <small>{{ 'blog.creation_date'|trans }} : {{ article.createdAt|date('d:m:Y h:m:s') }}
+                            {% if article.createdAt|date('d:m:Y h:m') < article.updatedAt|date('d:m:Y h:m') %}
+                                {{ 'blog.updated_at'|trans }} : {{ article.updatedAt|date('d:m:Y h:m:s') }}
+                            {% endif %}
+                           </small>
+                        </p>
+                    </div>
+                    <div>
+                    {% for category in article.categories  %}
+                        <a class="badge badge-info" href="{{ path('category_article_index', {'id': category.id}) }}">
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}
+                    <span class="ml-2">
+                        {{ article.nbViews }} <i class="far fa-eye fa-sm"></i> |
+                        {{ article.comments|length }} <i class="far fa-comments"></i>
+                    </span>
+                    </div>
+                    <span class="text-muted">{{ article.content|slice(0, sliceLength) ~ '...' }}</span>
+                    <a class="text-decoration-none move-arrow"
+                       href="{{ path('article_show', {'id': article.id}) }}" role="button">
+                        {{ 'blog.list.see_more'|trans }} <i class="fas fa-arrow-right fa-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {{ 'blog.list.nothing_to_show'|trans }}
+    {% endfor %}
+{% endblock %}
