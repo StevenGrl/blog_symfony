@@ -94,7 +94,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <div class="mx-auto dropdown-item">
                             <div class="custom-control custom-switch">
-                                {% if app.session.get('theme') == 'light' %}
+                                {% if app.session.get('theme') != 'dark' %}
                                     <input type="checkbox" class="custom-control-input" checked="checked" id="switch_theme">
                                 {% else %}
                                     <input type="checkbox" class="custom-control-input" id="switch_theme">
