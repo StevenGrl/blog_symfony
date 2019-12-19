@@ -6,17 +6,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
-    {% if app.session.get('theme') == 'light' %}
+    {% if app.session.get('theme') != 'dark' %}
         <link rel="stylesheet" id="light" href="https://bootswatch.com/4/litera/bootstrap.min.css">
     {% else %}
-        <link rel="stylesheet" id="dark" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+        <link rel="stylesheet" id="dark" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
     {% endif %}
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <script src="https://kit.fontawesome.com/271fb02698.js" crossorigin="anonymous"></script>
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-<input type="hidden" id="theme" name="theme" value="{{ app.session.get('theme') }}">
+{% if app.session.get('theme') %}
+    <input type="hidden" id="theme" name="theme" value="{{ app.session.get('theme') }}">
+{% else %}
+    <input type="hidden" id="theme" name="theme" value="{{ theme }}">
+{% endif %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-center">
     <a class="navbar-brand" href="{{ path('home') }}">{{ 'home'|trans }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -158,7 +162,6 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script src="{{ asset('switch_theme.js') }}"></script>
-<script src="{{ asset('count_articles.js') }}"></script>
 {% block javascript %}{% endblock %}
 </body>
 </html>

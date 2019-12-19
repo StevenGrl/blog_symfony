@@ -4,6 +4,10 @@
     {{ parent() }} - {{ 'blog.title'|trans }}
 {% endblock %}
 
+{% block javascript %}
+    <script src="{{ asset('count_articles.js') }}"></script>
+{% endblock %}
+
 {% block menu %}
     {% if is_granted("ROLE_ADMIN") %}
     <li class="nav-item">

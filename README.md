@@ -40,6 +40,13 @@ $ cd blog_symfony
 **Install dependencies**  
 $ composer install
 
-**Launch PHP  Server**  
-$ symfony server:start(DEV Only)  
+**Init Database**  
+Make a file in var called data.db  
+$ php bin/console doctrine:migration:migrate  
+
+**Load fixtures**  
+$ php bin/console doctrine:fixtures:load
+
+**Launch PHP  Server** (DEV Only)    
+$ symfony server:start
 and then you can go on http://localhost:8000
