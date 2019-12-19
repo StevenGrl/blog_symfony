@@ -31,8 +31,8 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
             $article->setThumbnail('images/' . $category . '/' . $random . '.jpg');
             $article->setUser($this->getReference($randomUser));
             $this->addReference('article' . $index, $article);
-            if ($faker->boolean) {
-                $user = $this->getReference($randomUser == 'steven ' ? $users[0] : $users[1]);
+            if ($article->getPublished()) {
+                $user = $this->getReference($randomUser == 'steven' ? 'axel' : 'steven');
                 $user->addFavouriteArticle($article);
                 $manager->persist($user);
             }

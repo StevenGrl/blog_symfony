@@ -52,7 +52,7 @@
             </div>
         </div>
     {% else %}
-        {{ 'blog.list.nothing_to_show'|trans }}
+        <h3 class="text-center">{{ 'blog.list.nothing_to_show'|trans }}</h3>
     {% endfor %}
     {% if id is defined %}
         {{ include('_pagination.html.twig', {'currentPath': currentPath, 'page': page, 'nbPage': nbPage, 'id': id}) }}

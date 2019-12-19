@@ -40,7 +40,13 @@ blog:
     nothing_to_show: "Aucun article n'existe ! Revenez plus tard ! :)"
   favourite:
     title: "Mes articles favoris"
+    nothing_to_show: "Aucun article en favoris ! Revenez après avoir liké un article ! :)"
   view:
+    delete:
+      title: 'Confirmation de suppression !'
+      message: 'Êtes-vous sûr de vouloir supprimer cet article ?'
+      submit: 'Supprimer'
+      close: 'Annuler'
     comments:
       title: 'Commentaires'
   add:

@@ -162,7 +162,7 @@ class ArticleController extends AbstractController
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
-        $form->add('Ajouter', SubmitType::class, ['label' => 'Ajouter un nouvel article']);
+        $form->add("send", SubmitType::class, ['label' => 'Ajouter un nouvel article']);
         $form->handleRequest($request);
         $title = $translator->trans('blog.add.title');
 
@@ -228,15 +228,15 @@ class ArticleController extends AbstractController
         $title = $translator->trans('blog.edit.title');
 
         $form = $this->createForm(ArticleType::class, $article);
-        $form->add('Ajouter', SubmitType::class, ['label' => 'Modifier l\'article']);
+        $form->add('send', SubmitType::class, ['label' => 'Modifier l\'article']);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             if ($antiSpam->isSpam($article->getContent())) {
-                $this->addFlash('danger', "Le contenu est considéré comme un spam ! 
-                Encore un comme ça et vous serez dénoncé à la CIA !!");
+                $form->get('content')->addError(new FormError('Le contenu est considéré comme un spam ! 
+                Encore un comme ça et vous serez dénoncé à la CIA !!'));
 
                 return $this->render('article/add.html.twig', [
                     'title' => $title,

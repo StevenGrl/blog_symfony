@@ -23,8 +23,7 @@ class ArticleType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Titre de l\'article',
                     'autofocus' => true
-                ],
-                'required' => false
+                ]
             ])
             ->add('author', TextType::class, [
                 'label' => 'Auteur',

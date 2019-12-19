@@ -63,8 +63,9 @@ class Article
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\PositiveOrZero(message="Le nombre de vue(s) ne peut pas être inférieur à 0")
      */
-    private $nb_views;
+    private $nbViews;
 
     /**
      * @ORM\Column(type="boolean")
@@ -206,12 +207,12 @@ class Article
 
     public function getNbViews(): ?int
     {
-        return $this->nb_views;
+        return $this->nbViews;
     }
 
-    public function setNbViews(int $nb_views): self
+    public function setNbViews(int $nbViews): self
     {
-        $this->nb_views = $nb_views;
+        $this->nbViews = $nbViews;
 
         return $this;
     }
@@ -348,13 +349,11 @@ class Article
     public function forceImageAndThumbnail()
     {
         if (is_null($this->image)) {
-            $lorempixel = $this->getCategories()[0]->getLorempixel();
+            $category = $this->getCategories()[0]->getName();
             $random = random_int(1, 10);
-            $baseUrl = 'http://lorempixel.com/';
-            $imageSize = '1300/300/';
-            $thumbnailSize = '640/480/';
-            $this->image = $baseUrl . $imageSize . $lorempixel . '/' . $random;
-            $this->thumbnail = $baseUrl . $thumbnailSize . $lorempixel . '/' . $random;
+            $url = 'images/' . $category . '/' . $random . '.jpg';
+            $this->image = $url;
+            $this->thumbnail = $url;
         }
     }
 

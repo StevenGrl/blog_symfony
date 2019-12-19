@@ -40,7 +40,13 @@ blog:
     nothing_to_show: "No article found ! See you ! :)"
   favourite:
     title: "My favourite articles"
+    nothing_to_show: "No articles in favorites! Come back after liking an article ! :)"
   view:
+    delete:
+      title: 'Confirm destroy !'
+      message: 'Are you sure you want to destroy this article ?'
+      submit: 'Destroy'
+      close: 'Close'
     comments:
       title: 'Comments'
   add:
