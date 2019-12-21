@@ -18,7 +18,6 @@ class CategoryFixtures extends Fixture
         foreach (self::CATEGORIES as $index => $value) {
             $category = new Category();
             $category->setName($value);
-            $category->setLorempixel(self::PLACE_IMG[$index]);
             $manager->persist($category);
             $this->addReference('category' . $index, $category);
         }
