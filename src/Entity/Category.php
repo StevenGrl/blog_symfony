@@ -24,11 +24,6 @@ class Category
     private $name;
 
     /**
-     * @ORM\Column(type="string", nullable=true, length=255)
-     */
-    private $lorempixel;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="categories")
      */
     private $articles;
@@ -52,24 +47,6 @@ class Category
     {
         $this->name = $name;
 
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLorempixel()
-    {
-        return $this->lorempixel;
-    }
-
-    /**
-     * @param mixed $lorempixel
-     * @return Category
-     */
-    public function setLorempixel($lorempixel)
-    {
-        $this->lorempixel = $lorempixel;
         return $this;
     }
 
