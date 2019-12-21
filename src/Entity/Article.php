@@ -298,7 +298,34 @@ class Article
         return $this;
     }
 
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsersWhoLike(): Collection
+    {
+        return $this->users_who_like;
+    }
 
+    public function addUsersWhoLike(User $usersWhoLike): self
+    {
+        if (!$this->users_who_like->contains($usersWhoLike)) {
+            $this->users_who_like[] = $usersWhoLike;
+            $usersWhoLike->addFavouriteArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersWhoLike(User $usersWhoLike): self
+    {
+        if ($this->users_who_like->contains($usersWhoLike)) {
+            $this->users_who_like->removeElement($usersWhoLike);
+            $usersWhoLike->removeFavouriteArticle($this);
+        }
+
+        return $this;
+    }
+    
     /**
      * @Assert\Callback()
      */
@@ -355,33 +382,5 @@ class Article
             $this->image = $url;
             $this->thumbnail = $url;
         }
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsersWhoLike(): Collection
-    {
-        return $this->users_who_like;
-    }
-
-    public function addUsersWhoLike(User $usersWhoLike): self
-    {
-        if (!$this->users_who_like->contains($usersWhoLike)) {
-            $this->users_who_like[] = $usersWhoLike;
-            $usersWhoLike->addFavouriteArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUsersWhoLike(User $usersWhoLike): self
-    {
-        if ($this->users_who_like->contains($usersWhoLike)) {
-            $this->users_who_like->removeElement($usersWhoLike);
-            $usersWhoLike->removeFavouriteArticle($this);
-        }
-
-        return $this;
     }
 }
