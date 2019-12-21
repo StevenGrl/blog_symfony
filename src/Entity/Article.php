@@ -325,7 +325,7 @@ class Article
 
         return $this;
     }
-    
+
     /**
      * @Assert\Callback()
      */

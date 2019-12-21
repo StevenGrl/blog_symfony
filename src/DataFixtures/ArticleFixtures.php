@@ -36,6 +36,10 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                 $user->addFavouriteArticle($article);
                 $manager->persist($user);
             }
+            if ($faker->boolean)
+            {
+                $article->setCreatedAt($faker->dateTime());
+            }
             $manager->persist($article);
         }
 
